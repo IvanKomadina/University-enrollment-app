@@ -1,0 +1,33 @@
+{% extends 'home_student.html' %}
+{% block filter_predmeta %}
+    <form method="POST">
+        {% csrf_token %}
+        <input type="number" name="bodovi">
+        <input type="submit" name="filter" value="Filtriraj po bodovima">
+        <br>
+        <input type="number" name="semestar">
+        <input type="submit" name="filter" value="Filtriraj po semestru">
+        <br>
+        <input type="submit" name="filter" value="Filtriraj po semestru i bodovima">
+    </form>
+
+    <table>
+    {% if ects_filter %}
+        {% for predmet in ects_filter %}
+            <tr><td>{{ predmet }}</td></tr>
+        {% endfor %}
+    {% endif %}
+
+    {% if semestar_filter %}
+        {% for predmet in semestar_filter %}
+            <tr><td>{{ predmet }}</td></tr>
+        {% endfor %}
+    {% endif %}
+
+    {% if sem_ects_filter %}
+        {% for predmet in sem_ects_filter %}
+            <tr><td>{{ predmet }}</td></tr>
+        {% endfor %}
+    {% endif %}
+    </table>
+{% endblock %}

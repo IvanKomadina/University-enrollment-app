@@ -1,0 +1,14 @@
+{% extends 'home_profesor.html' %}
+{% block profesor_courses %}
+<table>
+    <tr>
+      <th>Popis predmeta:</th>
+    </tr>
+    {% for course in courses %}
+    <tr>
+      <td>{{ course.name }}</td> 
+      <td><a href="{% url 'students_on_course_profesor' course.pk %}">Popis studenata</a></td>   
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

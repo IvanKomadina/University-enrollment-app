@@ -1,0 +1,15 @@
+{% extends 'home_admin.html' %}
+{% block profesors %}
+<table>
+    <tr>
+      <th>Popis profesora:</th>
+      <td><a href="{% url 'add_profesor'%}">Dodaj profesora</a></td>
+    </tr>
+    {% for profesor in profesors %}
+    <tr>
+      <td>{{ profesor.username }}</td> 
+      <td style="text-align: center;"><a href="{% url 'edit_profesor' profesor.pk %}">Edit</a></td>     
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

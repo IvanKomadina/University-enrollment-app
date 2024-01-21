@@ -1,0 +1,48 @@
+{% extends 'home_profesor.html' %}
+{% block students_on_course_profesor %}
+<div class="container">
+  <h3>Studenti na predmetu {{ upisani.0.predmet.name }} :</h3>
+  <br>
+  <div class="list-container">
+    <div class="list-item">
+      <h6>Upisani:</h6>
+      <ul>
+        {% for upis in upisani %}
+          <li>
+            <div class="list-item-content">
+              <span>{{ upis.student.username }}</span>
+              <form method="post" style="display: inline-block; margin-left: 10px;">
+                {% csrf_token %}
+                <input type="submit" name="{{ upis.student.username }}" value="Polozio" class="botun2">
+              </form>
+              <form method="post" style="display: inline-block;">
+                {% csrf_token %}
+                <input type="submit" name="{{ upis.student.username }}" value="Izgubio potpis" class="botun2">
+              </form>
+            </div>
+          </li>
+          <br>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="list-item">
+      <h6>Položili:</h6>
+      <ul>
+        {% for upis in polozeni %}
+          <li>{{ upis.student.username }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="list-item">
+      <h6>Izgubili potpis:</h6>
+      <ul>
+        {% for upis in izg_potpis %}
+          <li>{{ upis.student.username }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

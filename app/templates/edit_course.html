@@ -1,0 +1,11 @@
+{% extends 'home_admin.html' %}
+{% block edit_course %}
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <input type="submit" value="Update" name="update" class="botun"> 
+        <input type="submit" value="Delete" name="delete" class="botun">
+    </form>
+{% endblock %}

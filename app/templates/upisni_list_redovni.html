@@ -1,0 +1,64 @@
+{% extends 'home_admin.html' %}
+{% block upisni_list %}
+<h3>Upisni list studenta {{ student.username }}</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <br>
+            <h5>Upisani predmeti:</h5>
+            <div class="table-responsive">
+                {% for semestar in semestri %}
+                <table style="width:350px">
+                    <tr>
+                        <th>{{ semestar }}. semestar</th>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <th>Naziv predmeta</th>
+                        <th>Status</th>
+                        <td></td>
+                    </tr>
+                    {% for upis in upisi %}
+                        {% if semestar == upis.predmet.sem_red %}
+                            <tr>
+                                <td>{{ upis.predmet.name }}</td>
+                                <td>{{ upis.status }}</td>
+                                {% if upis.status == 'Upisan' %}
+                                    <td>
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <input type="submit" name="{{upis.predmet.name}}" value="Ispis" class="botun2">
+                                        </form>
+                                    </td> 
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+                </table>    
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <br>
+            <h5>Neupisani predmeti:</h5>
+            <div class="table-responsive">
+                <table>
+                    {% for course in neupisani %}
+                        <tr>   
+                            <td>{{ course.name }}</td>  
+                            <td>
+                                <form method="post">
+                                {% csrf_token %}
+                                <input type="submit" name="{{course.name}}" value="Upis" class="botun2">
+                            </td> 
+                            </form> 
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>  
+    </div>  
+</div>
+{% endblock %}

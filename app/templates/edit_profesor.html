@@ -1,0 +1,10 @@
+{% extends 'home_admin.html' %}
+{% block edit_profesor %}
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <input type="submit" value="Update" class="botun"> 
+    </form>
+{% endblock %}
